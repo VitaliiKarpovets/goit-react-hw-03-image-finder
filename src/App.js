@@ -1,25 +1,28 @@
-import logo from "./logo.svg";
-import "./App.css";
+import { Component } from "react";
+import { ToastContainer } from "react-toastify";
+import ImageGallery from "./components/ImageGallery/ImageGallery";
+import Searchbar from "./components/Searchbar/Searchbar";
+import { MainContainer } from "./App.styled";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+  state = {
+    currentSearch: "",
+  };
+
+  onSubmit = (event) => {
+    this.setState({ currentSearch: event });
+    console.log(event);
+  };
+
+  render() {
+    return (
+      <MainContainer>
+        <Searchbar onSubmit={this.onSubmit} />
+
+        <ImageGallery query={this.state.currentSearch} />
+
+        <ToastContainer />
+      </MainContainer>
+    );
+  }
 }
-
-export default App;
